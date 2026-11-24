@@ -174,6 +174,7 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 .rng input::-moz-range-track{height:6px;border-radius:3px;background:var(--silverfill)}
 .rng input::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--bg);border:3px solid var(--red);margin-top:-8px;position:relative;z-index:2}
 .rng input::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--bg);border:3px solid var(--red)}
+.anc.lo{top:42px}.rng.has2{height:58px}
 .anc{position:absolute;top:28px;transform:translateX(-50%);font-size:11px;color:var(--teal);white-space:nowrap;pointer-events:none;font-weight:600}
 .anc::before{content:"";position:absolute;left:50%;top:-10px;width:2px;height:8px;background:var(--teal);transform:translateX(-50%)}
 .band2{position:absolute;top:13px;height:18px;background:color-mix(in srgb,var(--teal) 18%,transparent);border-radius:3px;pointer-events:none}
@@ -215,10 +216,14 @@ footer{font-size:13.5px;color:var(--mute);padding:36px 0 48px;border-top:1px sol
 
 @media(max-width:900px){
 .scrolly{grid-template-columns:minmax(0,1fr)}
-.stick{grid-row:1;top:56px;height:52vh;z-index:2;background:var(--bg);padding-top:8px;border-bottom:1px solid var(--rule)}
+.stick{grid-row:1;top:56px;height:44vh;min-height:300px;z-index:2;background:var(--panel);padding-top:6px;border-bottom:1px solid var(--rule)}
+.stick .keys{flex-wrap:nowrap;overflow-x:auto;margin-top:4px;padding-bottom:6px}
+.stick .key{min-height:34px;font-size:12.5px;flex:none}
+.fig{min-height:0}
 .steps{grid-row:2}
-.step{min-height:70vh}
-.step:first-child{min-height:40vh}
+.step{min-height:88vh;align-items:flex-end;padding-bottom:4vh}
+.step:first-child{min-height:60vh}
+.mapbox::after{content:"Swipe to explore the map";position:sticky;left:0;display:block;font-size:12px;color:var(--mute);padding:6px 10px}
 .mapgrid,.calc,.tgrid,.cols{grid-template-columns:minmax(0,1fr)}
 .res{position:static}
 .tcard{grid-template-columns:minmax(0,1fr)}
@@ -589,8 +594,9 @@ function draw(){
  ['reg','min','adj'].forEach(k=>{if(vis(k))seen[k]=true;});
 }
 new ResizeObserver(draw).observe(cs);
-const stepObs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){st=+e.target.dataset.s;$$('.step').forEach(s=>s.classList.toggle('on',s===e.target));free=false;draw();}}),{rootMargin:'-48% 0px -48% 0px'});
-$$('.step').forEach(s=>stepObs.observe(s));
+const narrowQ=matchMedia('(max-width:900px)');let stepObs=null;
+const mkStepObs=()=>{if(stepObs)stepObs.disconnect();stepObs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){st=+e.target.dataset.s;$$('.step').forEach(s=>s.classList.toggle('on',s===e.target));free=false;draw();}}),{rootMargin:narrowQ.matches?'-80% 0px -18% 0px':'-48% 0px -48% 0px'});$$('.step').forEach(s=>stepObs.observe(s));};
+mkStepObs();narrowQ.addEventListener('change',mkStepObs);
 const fmt=v=>v==null?'not recorded':v.toFixed(1)+'m';
 const show=e=>{if(!geo)return;const r=cs.getBoundingClientRect();const px=(e.touches?e.touches[0].clientX:e.clientX)-r.left;let i=Math.round((px-geo.m.l)/geo.iw*(D.length-1));i=Math.max(0,Math.min(D.length-1,i));const d=D[i];
  tip.innerHTML=`<div><b>${d[0]}</b></div><div style="color:var(--red)">Registered: <b>${fmt(d[1])}</b></div><div>Mercury floor: <b>${fmt(d[2])}</b></div><div style="color:var(--teal)">Adjusted floor: <b>${fmt(d[3])}</b></div>${d[1]!=null?`<div style="margin-top:4px;color:var(--mute)">Register as share of adjusted floor: <b>${Math.round(d[1]/d[3]*100)}%</b></div>`:''}`;
@@ -641,6 +647,7 @@ function openNode(k){const n=N[k],[,,name,reg]=P[k];$$('#nodes .node').forEach(g
  const ot=$('[data-tab]',panel);ot.addEventListener('click',e=>{e.preventDefault();selectTab(ot.dataset.tab,true);});}
 $$('#nodes .node').forEach(g=>{g.addEventListener('click',()=>openNode(g.dataset.k));g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openNode(g.dataset.k);}});});
 openNode('potosi');
+const mbox=$('.mapbox');const centreMap=()=>{if(mbox.scrollWidth>mbox.clientWidth+4){const svg=$('#map');const k=svg.clientWidth/820;mbox.scrollLeft=Math.max(0,(1300-745)*k-mbox.clientWidth/2);}};requestAnimationFrame(centreMap);
 $$('#layers [data-l]').forEach(b=>b.addEventListener('click',()=>{const on=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',on);$(`#flows .lay[data-l="${b.dataset.l}"]`).classList.toggle('off',!on);}));
 const mot=$('#motion');const setMotion=on=>{mot.setAttribute('aria-pressed',on);$$('#map .flow.dots').forEach(p=>p.style.animationPlayState=on?'running':'paused');};
 if(reduce)setMotion(false);
@@ -661,7 +668,7 @@ const S=[
  {id:'rou',n:'3. Ports and routes',after:'Reached the fleets',q:'Share diverted before it reached the fleets',max:60,v:25,band:[15,30],anc:[[50,'Peru: ½']],note:'Buenos Aires 15–30% of Potosí output; up to half of Peru\'s output at the peak (Cross 1983, via Flynn and Giráldez).'},
  {id:'eur',n:'4. Arrival in Europe',after:'Registered at Seville',q:'Share reaching Spain unregistered',max:60,v:10,anc:[],note:'Morineau\'s gazettes imply large unregistered arrivals but give no single share; MacLeod warns they are estimates.'}];
 const SH=document.getElementById('sliders');
-SH.innerHTML=S.map(s=>`<div class="sl"><label for="r-${s.id}"><span>${s.n}</span><output id="o-${s.id}">${s.v}%</output></label><small>${s.q}</small><div class="rng">${s.band?`<div class="band2" style="left:calc(${s.band[0]/s.max*100}% + ${11-22*s.band[0]/s.max}px);width:calc(${(s.band[1]-s.band[0])/s.max*100}% - ${22*(s.band[1]-s.band[0])/s.max}px)"></div><span class="anc" style="left:calc(${(s.band[0]+s.band[1])/2/s.max*100}% + ${11-22*(s.band[0]+s.band[1])/2/s.max}px)">Buenos Aires 15–30%</span>`:''}${s.anc.map(([v,t])=>`<span class="anc" style="left:calc(${v/s.max*100}% + ${11-22*v/s.max}px)">${t}</span>`).join('')}<input type="range" id="r-${s.id}" min="0" max="${s.max}" step="1" value="${s.v}" aria-describedby="n-${s.id}"></div><small id="n-${s.id}" style="margin-top:4px">${s.note}</small></div>`).join('');
+SH.innerHTML=S.map(s=>`<div class="sl"><label for="r-${s.id}"><span>${s.n}</span><output id="o-${s.id}">${s.v}%</output></label><small>${s.q}</small><div class="rng${(s.anc.length+(s.band?1:0))>1?' has2':''}">${s.band?`<div class="band2" style="left:calc(${s.band[0]/s.max*100}% + ${11-22*s.band[0]/s.max}px);width:calc(${(s.band[1]-s.band[0])/s.max*100}% - ${22*(s.band[1]-s.band[0])/s.max}px)"></div><span class="anc" style="left:calc(${(s.band[0]+s.band[1])/2/s.max*100}% + ${11-22*(s.band[0]+s.band[1])/2/s.max}px)">Buenos Aires 15–30%</span>`:''}${s.anc.map(([v,t],i)=>`<span class="anc${(i+(s.band?1:0))%2?' lo':''}" style="left:calc(${v/s.max*100}% + ${11-22*v/s.max}px)">${t}</span>`).join('')}<input type="range" id="r-${s.id}" min="0" max="${s.max}" step="1" value="${s.v}" aria-describedby="n-${s.id}"></div><small id="n-${s.id}" style="margin-top:4px">${s.note}</small></div>`).join('');
 const BC=12.1/62.1*100;
 function calc(){
  let v=100;const rows=[['Produced',100,'var(--silver)']];
@@ -729,9 +736,9 @@ $$('#flows path.flow.base').forEach((p,i)=>{});
  let col=C();new MutationObserver(()=>col=C()).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
  matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>col=C());
  const draw=(dt)=>{ctx.clearRect(0,0,W,H);
-  ctx.font='600 11px Inter,system-ui,sans-serif';ctx.textAlign='center';
-  gates.forEach(([n,f])=>{const x=W*f;ctx.strokeStyle=col.rule;ctx.lineWidth=1;ctx.setLineDash([3,4]);ctx.beginPath();ctx.moveTo(x,H*0.1);ctx.lineTo(x,H*0.74);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle=col.mute;ctx.fillText(n.toUpperCase(),x,H*0.07+4);});
-  ctx.textAlign='left';ctx.fillStyle=col.mute;ctx.fillText('POTOSÍ',4,H*0.07+4);ctx.textAlign='right';ctx.fillStyle=col.red;ctx.fillText('SEVILLE REGISTER',W-4,H*0.07+4);
+  ctx.font=(W<640?'600 10px':'600 11px')+' Inter,system-ui,sans-serif';ctx.textAlign='center';
+  const sm=W<640;gates.forEach(([n,f],gi)=>{const x=W*f;if(sm)n=['Mine','Treasury','Routes','Europe'][gi];ctx.strokeStyle=col.rule;ctx.lineWidth=1;ctx.setLineDash([3,4]);ctx.beginPath();ctx.moveTo(x,H*0.1);ctx.lineTo(x,H*0.74);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle=col.mute;ctx.fillText(n.toUpperCase(),x,H*0.07+4);});
+  ctx.textAlign='right';ctx.fillStyle=col.red;ctx.fillText(sm?'SEVILLE':'SEVILLE REGISTER',W-4,sm?H*0.82:H*0.07+4);if(!sm){ctx.textAlign='left';ctx.fillStyle=col.mute;ctx.fillText('POTOSÍ',4,H*0.07+4);}
   ctx.strokeStyle=col.red;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(W-2,H*0.12);ctx.lineTo(W-2,H*0.72);ctx.stroke();
   ctx.fillStyle=col.rule;ctx.fillRect(0,H*0.9,W,1);
   for(const p of parts){
