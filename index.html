@@ -260,7 +260,7 @@ a{color:inherit}
 <p class="lede">The royal accounts of Spanish America are usually read as a record of how much silver the mines produced. Set against an independent check, the mercury the mines used, they record something narrower: what the Crown managed to register and tax. This site follows the silver from the mountain to Europe and shows where it slipped out of the count.</p>
 <div class="sieve" aria-label="Animated illustration: silver flows from the mine towards Seville and most of it drops out on the way">
 <canvas id="sv" aria-hidden="true"></canvas>
-<div class="svcap"><span>Illustration. Of every 100 pesos the mines produced in 1651–55, at most about 19 reached the Seville register. Where the rest left the count is the subject of Part three; the split between stations here is not to scale.</span><span>Produced <b id="svp">0</b> · registered <b id="svr" style="color:var(--red)">0</b> · <b id="svq">0%</b></span></div>
+<div class="svcap"><span>Illustration. Of every 100 pesos the mines produced in 1651–55, at most about 19 reached the Seville register. Where the rest left the count is the subject of Part three; the split between stations here is not to scale.</span><span>Pesos through the system <b id="svp">0</b> · reached the register <b id="svr" style="color:var(--red)">0</b> · <b id="svq"></b></span></div>
 </div>
 <div class="duel" aria-label="1651 to 1655, millions of pesos">
 <div class="meta">1651–55, millions of pesos of 8 reales (<a class="ref" href="#b-bc">Brading and Cross 1972, 579</a>)</div>
@@ -717,7 +717,7 @@ const _calc=calc;calc=function(){_calc();wrapFigs('#calcout strong');};calc();
 $$('#flows path.flow.base').forEach((p,i)=>{});
 
 /* ---------- hero sieve ---------- */
-(()=>{const cv=$('#sv');if(!cv)return;const ctx=cv.getContext('2d');let W=0,H=0,dpr=1,run=true,parts=[],t0=performance.now(),last=t0,spawnAcc=0,prod=0,regd=0;
+(()=>{const cv=$('#sv');if(!cv)return;const ctx=cv.getContext('2d');let W=0,H=0,dpr=1,run=true,parts=[],t0=performance.now(),last=t0,spawnAcc=0,prod=0,regd=0,lost=0;
  const gates=[['Mine',.2],['Treasury',.4],['Ports and routes',.6],['Europe',.8]];
  const P_REACH=12.1/62.1;
  const size=()=>{const r=cv.getBoundingClientRect();dpr=Math.min(2,devicePixelRatio||1);W=r.width;H=r.height;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);};
@@ -735,13 +735,13 @@ $$('#flows path.flow.base').forEach((p,i)=>{});
   ctx.strokeStyle=col.red;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(W-2,H*0.12);ctx.lineTo(W-2,H*0.72);ctx.stroke();
   ctx.fillStyle=col.rule;ctx.fillRect(0,H*0.9,W,1);
   for(const p of parts){
-   if(p.state===0){p.x+=p.sp*dt;const g=p.exit<4?W*gates[p.exit][1]:W;if(p.x>=g){if(p.exit<4){p.state=1;p.vy=10+Math.random()*20;}else{p.state=2;regd++;}}}
+   if(p.state===0){p.x+=p.sp*dt;const g=p.exit<4?W*gates[p.exit][1]:W;if(p.x>=g){if(p.exit<4){p.state=1;p.vy=10+Math.random()*20;lost++;}else{p.state=2;regd++;}}}
    else if(p.state===1){p.vy+=160*dt;p.y+=p.vy*dt;p.x+=12*dt;if(p.y>H*0.9){p.y=H*0.9;p.state=3;}}
    else if(p.state===2){p.a-=dt*1.2;}
    else if(p.state===3){p.a-=dt*0.35;}
    ctx.globalAlpha=Math.max(0,p.a);ctx.fillStyle=p.state===0?col.silver:p.state===2?col.red:col.ochre;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,6.283);ctx.fill();}
   ctx.globalAlpha=1;parts=parts.filter(p=>p.a>0);
-  $('#svp').textContent=prod;$('#svr').textContent=regd;$('#svq').textContent=prod?Math.round(regd/prod*100)+'% registered':'0%';};
+  const done=regd+lost;$('#svp').textContent=done;$('#svr').textContent=regd;$('#svq').textContent=done?Math.round(regd/done*100)+'% registered':'';};
  if(reduce){/* static frame: precompute a settled state */for(let i=0;i<120;i++){spawn();}parts.forEach(p=>{if(p.exit<4){p.x=W*gates[p.exit][1]+Math.random()*18;p.y=H*0.9-Math.random()*3;p.state=3;p.a=.8;}else{p.x=W-4-Math.random()*20;p.state=2;p.a=1;regd++;}});draw(0);parts.forEach(p=>p.a=p.a);return;}
  const io=new IntersectionObserver(es=>{run=es[0].isIntersecting;if(run){last=performance.now();requestAnimationFrame(loop);}});io.observe(cv);
  function loop(t){if(!run)return;const dt=Math.min(.05,(t-last)/1000);last=t;spawnAcc+=dt*(W/60);while(spawnAcc>1){spawn();spawnAcc--;}draw(dt);requestAnimationFrame(loop);}
