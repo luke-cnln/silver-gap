@@ -174,7 +174,7 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 .rng input::-moz-range-track{height:6px;border-radius:3px;background:var(--silverfill)}
 .rng input::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--bg);border:3px solid var(--red);margin-top:-8px;position:relative;z-index:2}
 .rng input::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--bg);border:3px solid var(--red)}
-.anc.lo{top:42px}.rng.has2{height:58px}
+.anc.lo{top:42px}.anc.lo::before{top:-24px;height:22px}.rng.has2{height:58px}
 .anc{position:absolute;top:28px;transform:translateX(-50%);font-size:11px;color:var(--teal);white-space:nowrap;pointer-events:none;font-weight:600}
 .anc::before{content:"";position:absolute;left:50%;top:-10px;width:2px;height:8px;background:var(--teal);transform:translateX(-50%)}
 .band2{position:absolute;top:13px;height:18px;background:color-mix(in srgb,var(--teal) 18%,transparent);border-radius:3px;pointer-events:none}
@@ -231,7 +231,7 @@ footer{font-size:13.5px;color:var(--mute);padding:36px 0 48px;border-top:1px sol
 @media(max-width:700px){.tdot span{display:none}.tdot[aria-pressed=true] span{display:block}}
 @media(max-width:560px){
 body{font-size:16px}
-.drow{grid-template-columns:minmax(0,1fr) 4.8em}.drow .dtrack{grid-column:1/-1;grid-row:2}
+.drow{grid-template-columns:minmax(0,1fr) auto}.drow .dtrack{grid-column:1/-1;grid-row:2}.dv{font-size:24px}
 .bar{grid-template-columns:minmax(0,1fr) 4.6em}.bar .track{grid-column:1/-1;grid-row:2}
 .brand{font-size:18px}
 .tl .yr:nth-child(even){display:none}
@@ -585,17 +585,17 @@ function draw(){
  if(s.ann==='peak'&&vis('reg')){g+=lab(4,58.2,'58.2m peak, 1591–95','var(--red)');g+=lab(17,5.6,'5.6m, 1656–60','var(--red)',-8,-10,'end');}
  if(s.ann==='floor'&&vis('min')){g+=lab(10,62.3,'62.3m floor, 1621–25','var(--silver)');}
  if(s.ann==='part'&&!narrow){g+=`<text x="${x(14)}" y="${(y(22.8)+y(49.2))/2}" text-anchor="middle" font-weight="600">silver not in the register</text>`;}
- if(s.ann==='adj'&&vis('adj')){g+=lab(10,77.9,'77.9m adjusted, 1621–25','var(--teal)');}
+ if(s.ann==='adj'&&vis('adj')){g+=lab(10,77.9,narrow?'77.9m adjusted':'77.9m adjusted, 1621–25','var(--teal)',8,narrow?4:-10);}
  if(s.ann==='focus'){g+=lab(16,12.1,'12.1m registered','var(--red)',-8,18,'end');g+=lab(16,62.1,'62.1m adjusted floor','var(--teal)',-8,-10,'end');g+=`<text x="${x(16)+10}" y="${(y(12.1)+y(62.1))/2}" font-weight="700" font-size="15">≈ 19%</text>`;}
  if(s.ann==='end'){g+=lab(17,5.6,'register ends 1660','var(--red)',-8,18,'end');g+=lab(22,15.2,'15.2m, 1681–85','var(--silver)',8,18);}
- g+=`<text x="${m.l+4}" y="${m.t+12}" fill="var(--mute)">million pesos per five years</text><line id="hv" x1="0" x2="0" y1="${m.t}" y2="${m.t+ih}" stroke="var(--ink)" opacity="0"/>`;
+ g+=`<text x="${m.l+4}" y="${m.t+12}" fill="var(--mute)">${narrow?'m pesos / 5 yrs':'million pesos per five years'}</text><line id="hv" x1="0" x2="0" y1="${m.t}" y2="${m.t+ih}" stroke="var(--ink)" opacity="0"/>`;
  cs.innerHTML=g;
  if(!reduce)$$('.ln.draw',cs).forEach(p=>{const k=p.dataset.k;if(vis(k)&&!seen[k]){const L=p.getTotalLength();p.style.strokeDasharray=L;p.style.strokeDashoffset=L;p.getBoundingClientRect();p.style.transition='stroke-dashoffset 1.4s cubic-bezier(.3,.6,.2,1)';p.style.strokeDashoffset=0;}});
  ['reg','min','adj'].forEach(k=>{if(vis(k))seen[k]=true;});
 }
 new ResizeObserver(draw).observe(cs);
 const narrowQ=matchMedia('(max-width:900px)');let stepObs=null;
-const mkStepObs=()=>{if(stepObs)stepObs.disconnect();stepObs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){st=+e.target.dataset.s;$$('.step').forEach(s=>s.classList.toggle('on',s===e.target));free=false;draw();}}),{rootMargin:narrowQ.matches?'-80% 0px -18% 0px':'-48% 0px -48% 0px'});$$('.step').forEach(s=>stepObs.observe(s));};
+const mkStepObs=()=>{if(stepObs)stepObs.disconnect();const n=narrowQ.matches;stepObs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){const step=e.target.closest('.step');st=+step.dataset.s;$$('.step').forEach(s=>s.classList.toggle('on',s===step));free=false;draw();}}),{rootMargin:n?'-62% 0px -36% 0px':'-48% 0px -48% 0px'});$$(n?'.step .c':'.step').forEach(s=>stepObs.observe(s));};
 mkStepObs();narrowQ.addEventListener('change',mkStepObs);
 const fmt=v=>v==null?'not recorded':v.toFixed(1)+'m';
 const show=e=>{if(!geo)return;const r=cs.getBoundingClientRect();const px=(e.touches?e.touches[0].clientX:e.clientX)-r.left;let i=Math.round((px-geo.m.l)/geo.iw*(D.length-1));i=Math.max(0,Math.min(D.length-1,i));const d=D[i];
