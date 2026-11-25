@@ -207,6 +207,30 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 .pbtn{border:1px solid var(--rule);background:var(--bg);border-radius:18px;padding:8px 13px;font-size:13.5px;cursor:pointer;min-height:40px}
 .pbtn:hover{border-color:var(--ink)}
 
+/* method lab */
+.lab{margin-top:clamp(40px,6vw,72px);border:1px solid var(--rule);border-radius:16px;padding:clamp(18px,3vw,32px);background:var(--bg)}
+.labhead p{max-width:62ch;margin-top:8px}
+.labgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(22px,4vw,48px);margin-top:18px;align-items:start}
+.selwrap select{margin-top:10px;width:100%;font:inherit;font-size:15px;padding:9px 10px;border-radius:8px;border:1px solid var(--rule);background:var(--bg);color:var(--ink)}
+.sl label.chk{justify-content:flex-start;gap:10px;align-items:center;font-weight:600;cursor:pointer}
+.sl label.chk input{width:18px;height:18px;accent-color:var(--teal)}
+.lbar{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 14px;align-items:center;margin-bottom:14px}
+.lbar .l{font-size:14.5px}
+.lbar .dtrack{grid-column:1/-1;grid-row:2;height:26px}
+.lbar .dfill{transition:width .5s cubic-bezier(.2,.7,.1,1)}
+.spark{margin-top:18px}
+#lsp{width:100%;height:auto;display:block;margin-top:6px;overflow:visible}
+@media(max-width:900px){.labgrid{grid-template-columns:minmax(0,1fr)}}
+.gl{border-bottom:1.5px dotted var(--teal);cursor:help}
+.gl:focus-visible{outline:2px solid var(--teal);outline-offset:2px;border-radius:2px}
+/* next bridges */
+.next{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:4px 18px;margin-top:clamp(40px,6vw,64px);padding:18px 0 4px;border-top:1px solid var(--rule);text-decoration:none;color:inherit}
+.next .kicker{grid-column:1;margin:0}
+.next .nl{grid-column:1;font-family:"IM Fell English",Georgia,serif;font-size:clamp(20px,2.2vw,26px);line-height:1.2}
+.next .na{grid-column:2;grid-row:1/3;font-size:28px;transition:transform .3s}
+.next:hover .na{transform:translateX(6px)}
+.next:hover .nl{text-decoration:underline;text-decoration-color:var(--silver);text-underline-offset:4px}
+@media print{.next{display:none}}
 /* timeline */
 .tl{position:relative;margin-top:30px;height:160px}
 .tl .axis{position:absolute;left:0;right:0;top:74px;height:2px;background:var(--rule)}
@@ -314,8 +338,8 @@ a{color:inherit}
 <p class="lede">Brading and Cross set the Seville registers beside a floor for production built from mercury consumption. Scroll through the six steps, then explore the chart yourself.</p>
 <div class="scrolly">
 <div class="steps" id="steps">
-<div class="step" data-s="0"><div class="c"><div class="n">Step 1 of 6</div><h3>The Crown's count</h3><p>Silver registered on arrival at Seville, five years at a time (Hamilton's series). It peaks at 58.2 million pesos in 1591–95 and falls to 5.6 million by 1656–60. Read on its own, this is the famous seventeenth-century collapse.</p><p class="meta">Production could only be rebuilt from the royal fifth, the mint registers and registered shipments, all "collected for taxation purposes" (<a class="ref" href="#b-bc">Brading and Cross 1972, 568–70</a>).</p></div></div>
-<div class="step" data-s="1"><div class="c"><div class="n">Step 2 of 6</div><h3>An independent floor</h3><p>Mercury was an industrial input, not a taxed product. Multiply the mercury the refineries used by the silver it yields and you get the least silver they can have produced: "the one reliable check upon the veracity of the fiscal data" (<a class="ref" href="#b-bc">Brading and Cross 1972, 570</a>).</p><p class="meta">It is a floor, not an estimate. It misses all silver smelted rather than amalgamated.</p></div></div>
+<div class="step" data-s="0"><div class="c"><div class="n">Step 1 of 6</div><h3>The Crown's count</h3><p>Silver registered on arrival at Seville, five years at a time (Hamilton's series). It peaks at 58.2 million pesos in 1591–95 and falls to 5.6 million by 1656–60. Read on its own, this is the famous seventeenth-century collapse.</p><p class="meta">Production could only be rebuilt from the <span class="gl" tabindex="0" data-def="The quinto: the Crown's 20 per cent tax on silver, plus a 1.5 per cent assay charge. Bars had to be presented at the treasury for stamping (Brading and Cross 1972, 561).">royal fifth</span>, the mint registers and registered shipments, all "collected for taxation purposes" (<a class="ref" href="#b-bc">Brading and Cross 1972, 568–70</a>).</p></div></div>
+<div class="step" data-s="1"><div class="c"><div class="n">Step 2 of 6</div><h3>An independent floor</h3><p>Mercury was an industrial input, not a taxed product. Multiply the mercury the refineries used by the silver it yields and you get the least silver they can have produced: "the one reliable check upon the veracity of the fiscal data" (<a class="ref" href="#b-bc">Brading and Cross 1972, 570</a>).</p><p class="meta">It is a floor, not an estimate. It misses all silver smelted rather than <span class="gl" tabindex="0" data-def="Refining crushed ore with mercury. Mercury was an industrial input, not a taxed product, so the quantity used gives a check that does not depend on the fiscal records (Brading and Cross 1972, 570).">amalgamated</span>.</p></div></div>
 <div class="step" data-s="2"><div class="c"><div class="n">Step 3 of 6</div><h3>The lines part</h3><p>Until about 1620 the two series move together. From the 1620s the register keeps falling while the floor holds between 30 and 50 million. The shaded area is silver the mines produced that the Seville register never shows.</p></div></div>
 <div class="step" data-s="3"><div class="c"><div class="n">Step 4 of 6</div><h3>Raising the floor</h3><p>Brading and Cross add 15 per cent for smelted silver and 10 per cent for gold. The adjusted floor sits higher again, and it is still a minimum: contraband ore refined outside the official system is only partly inside it.</p></div></div>
 <div class="step" data-s="4"><div class="c"><div class="n">Step 5 of 6</div><h3>1651–55: 12.1 against 62.1</h3><p>In the worst quinquennium the register records 12.1 million pesos against an adjusted floor of 62.1 million. Because the floor is a minimum, the Crown's share of real output was at most about 19 per cent.</p></div></div>
@@ -330,6 +354,29 @@ a{color:inherit}
 </div>
 </div>
 </div>
+<div class="lab" id="lab">
+<div class="labhead">
+<div class="kicker">Check the method</div>
+<h3>Rebuild the floor yourself</h3>
+<p>Brading and Cross turned mercury into silver with a deliberately low yield, then added a margin for silver that was smelted rather than amalgamated, and for gold (<a class="ref" href="#b-bc">1972, 570, 579</a>). Change their assumptions and see whether the register ever catches up.</p>
+</div>
+<div class="labgrid">
+<div class="labin">
+<div class="sl"><label for="lp">Five-year period <output id="lpo"></output></label><div class="selwrap"><select id="lp" aria-label="Five-year period"></select></div><small>Brading and Cross, Table I. The register stops after 1656–60.</small></div>
+<div class="sl"><label for="ly">Silver per quintal of mercury <output id="lyo"></output></label><div class="rng"><input type="range" id="ly" min="100" max="150" step="1" value="110"><span class="anc" style="left:20%">110 · Brading and Cross</span></div><small>Their figure is "deliberately low": 110 marks, or 935 pesos (1 mark = 8.5 pesos). Higher yields raise the floor.</small></div>
+<div class="sl"><label for="ls">Silver smelted, not amalgamated <output id="lso"></output></label><div class="rng"><span class="band2" style="left:43.3%;width:56.7%"></span><input type="range" id="ls" min="0" max="30" step="1" value="15"><span class="anc" style="left:50%">15% · their margin</span></div><small>Smelting left no trace in the mercury accounts. The teal band is their range of 13 to 30 per cent (p. 570).</small></div>
+<div class="sl"><label class="chk"><input type="checkbox" id="lg" checked> Add 10 per cent for gold, as they do</label><small>The Seville register counts gold and silver together.</small></div>
+</div>
+<div class="labout">
+<div class="lbar"><div class="l">Seville register</div><div class="dtrack"><div class="dfill" id="lbr" style="background:var(--red)"></div></div><div class="dv" id="lvr">0</div></div>
+<div class="lbar"><div class="l">Floor on your assumptions</div><div class="dtrack"><div class="dfill" id="lbf" style="background:linear-gradient(90deg,var(--silver),var(--teal))"></div></div><div class="dv" id="lvf">0</div></div>
+<div class="verdict2" id="lout" aria-live="polite"></div>
+<div class="spark"><div class="meta">Share of the floor that reached the register, every period, on these assumptions</div><svg id="lsp" viewBox="0 0 560 150" role="img" aria-label="Register as a share of the floor, 1571 to 1660"></svg></div>
+<p class="meta">Mercury used is implied from Table I (column 2 divided by 935 pesos a quintal). The model reproduces their adjusted floor exactly at 110 marks, 15 per cent and gold on.</p>
+</div>
+</div>
+</div>
+<a class="next" href="#map-s"><span class="kicker">Next · The map</span><span class="nl">The gap is real, and it opens in the 1620s. So where did the silver go?</span><span class="na" aria-hidden="true">→</span></a>
 </div>
 </section>
 
@@ -359,6 +406,7 @@ a{color:inherit}
 <aside class="panel" id="panel" aria-live="polite"></aside>
 </div>
 <p class="meta" style="margin-top:10px">Routes are schematic. Line weights are indicative, not to scale. Base map: Natural Earth 1:50m land, Miller projection.</p>
+<a class="next" href="#stations"><span class="kicker">Next · Four leaks</span><span class="nl">Four places where silver slipped out of the count, station by station.</span><span class="na" aria-hidden="true">→</span></a>
 </div>
 </section>
 
@@ -378,7 +426,7 @@ a{color:inherit}
 <div class="tgrid">
 <div>
 <h3>Ore shares at Potosí</h3>
-<p>Wage labour at Potosí was paid partly in ore. Workers kept shares of rich ore (corpa), mined at weekends and carried ore out at the end of shifts, selling it at the Indian ore market for small-scale refining (<a class="ref" href="#b-smith">Smith 2008, 36</a>). This silver avoided the Crown's 20 per cent tax and was tolerated because owners needed the labour (<a class="ref" href="#b-smith">37</a>).</p>
+<p>Wage labour at Potosí was paid partly in ore. Workers kept shares of rich ore (<span class="gl" tabindex="0" data-def="Shares of rich ore kept by wage workers at Potosí, partly as pay and partly carried out at the end of a shift, sold at the Indian ore market and refined outside the taxed system (Smith 2008, 36–37).">corpa</span>), mined at weekends and carried ore out at the end of shifts, selling it at the Indian ore market for small-scale refining (<a class="ref" href="#b-smith">Smith 2008, 36</a>). This silver avoided the Crown's 20 per cent tax and was tolerated because owners needed the labour (<a class="ref" href="#b-smith">37</a>).</p>
 <div class="bars" aria-label="Share of Potosí silver produced informally">
 <div class="bar"><div class="lbl">Corpa<small>Smith, drawing on Stern and Tandeter</small></div><div class="track"><div data-w="25"></div></div><div class="v">25%</div></div>
 <div class="bar"><div class="lbl">Trapiche refining, 1759<small>Tandeter 1981, 134</small></div><div class="track"><div data-w="34"></div></div><div class="v">over ⅓</div></div>
@@ -439,6 +487,7 @@ a{color:inherit}
 </tbody></table></div>
 </div>
 </div>
+<a class="next" href="#peso"><span class="kicker">Next · Follow 100 pesos</span><span class="nl">Can the documented leaks explain the whole gap? Test it.</span><span class="na" aria-hidden="true">→</span></a>
 </div>
 </section>
 
@@ -459,6 +508,7 @@ a{color:inherit}
 </div>
 </div>
 </div>
+<a class="next" href="#debate"><span class="kicker">Next · The debate</span><span class="nl">Historians have argued over these numbers for ninety years.</span><span class="na" aria-hidden="true">→</span></a>
 </div>
 </section>
 
@@ -470,6 +520,7 @@ a{color:inherit}
 <div class="legend"><span><i style="background:var(--red)"></i>Counts the Crown's records</span><span><i style="background:var(--teal)"></i>Counts around the records</span><span><i style="background:var(--ochre)"></i>Studies labour and trade practice</span></div>
 <div class="tl" id="tl" role="group" aria-label="Timeline of historians' works, 1934 to 2022"><div class="axis"></div></div>
 <div class="tcard" id="tcard" aria-live="polite"></div>
+<a class="next" href="#verdict"><span class="kicker">Next · Verdict</span><span class="nl">So what can the numbers tell us, and what can they not?</span><span class="na" aria-hidden="true">→</span></a>
 </div>
 </section>
 
@@ -572,11 +623,12 @@ if(!reduce&&'IntersectionObserver' in window){const rv=new IntersectionObserver(
  $$('.band>.wrap>.kicker,.band>.wrap>h2,.band>.wrap>.lede').forEach(el=>{el.classList.add('rv');rv.observe(el);});}
 /* citation popovers */
 const pop=$('#pop');let popFor=null;
-const showPop=a=>{const li=document.getElementById(a.getAttribute('href').slice(1));if(!li)return;pop.textContent=li.textContent;pop.style.display='block';const r=a.getBoundingClientRect();const w=pop.offsetWidth;let x=r.left+scrollX+r.width/2-w/2;x=Math.max(8,Math.min(document.documentElement.clientWidth-w-8,x));let y=r.top+scrollY-pop.offsetHeight-10;if(r.top<pop.offsetHeight+70)y=r.bottom+scrollY+10;pop.style.left=x+'px';pop.style.top=y+'px';popFor=a;};
+const showPop=a=>{const def=a.dataset&&a.dataset.def;const li=def?null:document.getElementById((a.getAttribute('href')||'#').slice(1));if(!def&&!li)return;pop.textContent=def||li.textContent;pop.style.display='block';const r=a.getBoundingClientRect();const w=pop.offsetWidth;let x=r.left+scrollX+r.width/2-w/2;x=Math.max(8,Math.min(document.documentElement.clientWidth-w-8,x));let y=r.top+scrollY-pop.offsetHeight-10;if(r.top<pop.offsetHeight+70)y=r.bottom+scrollY+10;pop.style.left=x+'px';pop.style.top=y+'px';popFor=a;};
 const hidePop=()=>{pop.style.display='none';popFor=null;};
 $$('.ref').forEach(a=>{a.addEventListener('mouseenter',()=>showPop(a));a.addEventListener('mouseleave',hidePop);a.addEventListener('focus',()=>showPop(a));a.addEventListener('blur',hidePop);
  a.addEventListener('click',()=>{hidePop();const li=document.getElementById(a.getAttribute('href').slice(1));if(li){li.classList.add('hl');setTimeout(()=>li.classList.remove('hl'),2200);}});});
 addEventListener('keydown',e=>{if(e.key==='Escape')hidePop();});
+$$('.gl').forEach(a=>{a.addEventListener('mouseenter',()=>showPop(a));a.addEventListener('mouseleave',hidePop);a.addEventListener('focus',()=>showPop(a));a.addEventListener('blur',hidePop);a.addEventListener('click',()=>popFor===a?hidePop():showPop(a));});
 
 /* ---------- ledger chart ---------- */
 const D=[["1571–75",19.7,17.3,21.6],["1576–80",28.5,35.5,44.4],["1581–85",48.6,39.2,49.0],["1586–90",39.4,49.2,61.5],["1591–95",58.2,47.4,59.3],["1596–1600",57.0,41.3,51.6],["1601–05",44.9,31.6,39.5],["1606–10",52.0,34.5,43.1],["1611–15",40.6,49.3,61.6],["1616–20",49.8,50.5,63.1],["1621–25",44.7,62.3,77.9],["1626–30",41.3,39.1,48.9],["1631–35",28.3,46.3,57.9],["1636–40",27.0,51.9,64.8],["1641–45",22.8,49.2,61.4],["1646–50",19.5,36.8,45.0],["1651–55",12.1,49.7,62.1],["1656–60",5.6,37.5,46.9],["1661–65",null,32.6,40.8],["1666–70",null,31.9,39.9],["1671–75",null,42.6,53.3],["1676–80",null,33.8,42.3],["1681–85",null,15.2,19.4],["1686–90",null,26.5,33.1],["1691–95",null,34.5,43.1],["1696–1700",null,31.9,39.9]];
@@ -783,6 +835,27 @@ $$('#flows path.flow.base').forEach((p,i)=>{});
  function loop(t){if(!run)return;const dt=Math.min(.05,(t-last)/1000);last=t;spawnAcc+=dt*(W/60);while(spawnAcc>1){spawn();spawnAcc--;}draw(dt);requestAnimationFrame(loop);}
 })();
 })();
+/* method lab: rebuild the floor */
+(function(){const sel=$('#lp');if(!sel)return;const PPM=935/110;
+ D.forEach((r,i)=>{const o=document.createElement('option');o.value=i;o.textContent=r[0]+(r[1]==null?' (no register)':'');if(r[0]==='1651–55')o.selected=true;sel.appendChild(o);});
+ const ly=$('#ly'),ls=$('#ls'),lg=$('#lg');
+ const fl=(r,y,s,g)=>r[2]/935*y*PPM*(1+s/100+(g?0.10:0));
+ function draw(){const y=+ly.value,s=+ls.value,g=lg.checked,r=D[+sel.value];
+  $('#lyo').textContent=y+' marks';$('#lso').textContent=s+'%';$('#lpo').textContent=r[0];
+  const f=fl(r,y,s,g),reg=r[1],mx=Math.max(f,reg||0,1);
+  $('#lbf').style.width=(f/mx*100)+'%';$('#lvf').textContent='≥ '+f.toFixed(1);
+  $('#lbr').style.width=reg==null?'0%':(reg/mx*100)+'%';$('#lvr').textContent=reg==null?'none':reg.toFixed(1);
+  const out=$('#lout');
+  if(reg==null){out.innerHTML='<strong>No register to compare</strong><span class="meta">Hamilton\'s series ends in 1660. The floor alone says the mines kept producing at least '+f.toFixed(1)+' million pesos.</span>';}
+  else{const sh=reg/f*100;out.innerHTML=sh>=100?'<strong>The register covers the floor</strong><span class="meta">In '+r[0]+' the Crown\'s count is at or above the least the mines produced, so the gap does not show here.</span>':'<strong>At most '+Math.round(sh)+' per cent reached the register</strong><span class="meta">At least '+(f-reg).toFixed(1)+' million pesos produced in '+r[0]+' are missing from the Seville count on these assumptions.</span>';}
+  // sparkline
+  const svg=$('#lsp'),W=560,H=150,L=34,B=22,T=8,R=6,rows=D.filter(d=>d[1]!=null),n=rows.length;
+  const xs=i=>L+i*(W-L-R)/(n-1),ys=v=>T+(H-T-B)*(1-Math.min(v,150)/150);
+  let pth='',dots='';rows.forEach((d,i)=>{const v=d[1]/fl(d,y,s,g)*100;pth+=(i?'L':'M')+xs(i).toFixed(1)+' '+ys(v).toFixed(1);if(d===r)dots='<circle cx="'+xs(i).toFixed(1)+'" cy="'+ys(v).toFixed(1)+'" r="5" fill="var(--red)" stroke="var(--bg)" stroke-width="2"/>';});
+  const g100=ys(100);
+  svg.innerHTML='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+g100+'" y2="'+g100+'" stroke="var(--rule)" stroke-dasharray="4 4"/><text x="'+(L-6)+'" y="'+(g100+4)+'" text-anchor="end" style="font-size:11px">100%</text><text x="'+(L-6)+'" y="'+(ys(0)+4)+'" text-anchor="end" style="font-size:11px">0</text><path d="'+pth+'" fill="none" stroke="var(--red)" stroke-width="2.2" stroke-linejoin="round"/>'+dots+'<text x="'+L+'" y="'+(H-4)+'" style="font-size:11px">'+rows[0][0]+'</text><text x="'+(W-R)+'" y="'+(H-4)+'" text-anchor="end" style="font-size:11px">'+rows[n-1][0]+'</text>';
+ }
+ [ly,ls,lg,sel].forEach(e=>e.addEventListener('input',draw));sel.addEventListener('change',draw);draw();})();
 </script>
 </body>
 </html>
