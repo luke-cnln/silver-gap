@@ -245,6 +245,17 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 .qs a.seen::after{content:"✓";position:absolute;top:10px;right:12px;font-size:13px;color:var(--teal)}
 @media(max-width:900px){.qs ol{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media print{.qs{display:none}}
+/* evidence type badges */
+.et{display:inline-block;margin-top:6px;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;letter-spacing:.02em;border:1px solid currentColor;white-space:nowrap}
+.lbl .et{display:table;margin-top:5px}
+.card .et{margin:2px 0 6px}
+.e-rec{color:var(--teal)}
+.e-est{color:var(--silver)}
+.e-cla{color:var(--ochre)}
+.etkey{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-top:16px;font-size:13px}
+.etkey .et{margin:0}
+.etkey .etk-t{font-weight:600;margin-right:4px}
+.etkey span:not(.et):not(.etk-t){opacity:.75;margin-right:10px}
 /* next bridges */
 .next{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:4px 18px;margin-top:clamp(40px,6vw,64px);padding:18px 0 4px;border-top:1px solid var(--rule);text-decoration:none;color:inherit}
 .next .kicker{grid-column:1;margin:0}
@@ -448,6 +459,7 @@ a{color:inherit}
 <div class="kicker">Part three</div>
 <h2>Four points where silver left the count</h2>
 <p class="lede">Follow a peso from the Cerro Rico to a European counting house. Each station has its own sources, and each source carries its own doubt.</p>
+<div class="etkey" aria-label="How solid is each figure?"><span class="etk-t">How solid is each figure?</span><span class="et e-rec">From the records</span><span>counted from archival series</span><span class="et e-est">Historian's estimate</span><span>a historian's reasoned figure</span><span class="et e-cla">Contemporary claim</span><span>what an official said at the time, often with a motive</span></div>
 <div class="tabs" role="tablist" aria-label="Stations">
 <button class="tab" role="tab" id="t-mine" aria-controls="mine" aria-selected="true"><b>1</b>At the mine</button>
 <button class="tab" role="tab" id="t-treasury" aria-controls="treasury" aria-selected="false" tabindex="-1"><b>2</b>At the treasury</button>
@@ -461,9 +473,9 @@ a{color:inherit}
 <h3>Ore shares at Potosí</h3>
 <p>Wage labour at Potosí was paid partly in ore. Workers kept shares of rich ore (<span class="gl" tabindex="0" data-def="Shares of rich ore kept by wage workers at Potosí, partly as pay and partly carried out at the end of a shift, sold at the Indian ore market and refined outside the taxed system (Smith 2008, 36–37).">corpa</span>), mined at weekends and carried ore out at the end of shifts, selling it at the Indian ore market for small-scale refining (<a class="ref" href="#b-smith">Smith 2008, 36</a>). This silver avoided the Crown's 20 per cent tax and was tolerated because owners needed the labour (<a class="ref" href="#b-smith">37</a>).</p>
 <div class="bars" aria-label="Share of Potosí silver produced informally">
-<div class="bar"><div class="lbl">Corpa<small>Smith, drawing on Stern and Tandeter</small></div><div class="track"><div data-w="25"></div></div><div class="v">25%</div></div>
-<div class="bar"><div class="lbl">Trapiche refining, 1759<small>Tandeter 1981, 134</small></div><div class="track"><div data-w="34"></div></div><div class="v">over ⅓</div></div>
-<div class="bar"><div class="lbl">Capchas, 1774<small>Viceroy Amat, in Brading and Cross, 567</small></div><div class="track"><div data-w="50"></div></div><div class="v">½</div></div>
+<div class="bar"><div class="lbl">Corpa<small>Smith, drawing on Stern and Tandeter</small><span class="et e-est">Historian's estimate</span></div><div class="track"><div data-w="25"></div></div><div class="v">25%</div></div>
+<div class="bar"><div class="lbl">Trapiche refining, 1759<small>Tandeter 1981, 134</small><span class="et e-rec">From the records</span></div><div class="track"><div data-w="34"></div></div><div class="v">over ⅓</div></div>
+<div class="bar"><div class="lbl">Capchas, 1774<small>Viceroy Amat, in Brading and Cross, 567</small><span class="et e-cla">Contemporary claim</span></div><div class="track"><div data-w="50"></div></div><div class="v">½</div></div>
 </div>
 </div>
 <div class="ev">
@@ -481,8 +493,8 @@ a{color:inherit}
 <p>Garner's long-run series, the standard reconstruction, is built from treasury tax receipts and converted into production estimates in several steps (<a class="ref" href="#b-garner">Garner 1988, 900 n. 4</a>). He is plain about what it misses: silver never registered "would not appear in the treasury ledgers", and filling the gaps could soften the seventeenth-century contraction (<a class="ref" href="#b-garner">903 n. 9</a>).</p>
 </div>
 <div class="ev">
-<div class="card"><div class="num">35%</div><h4>Cost from pit to mint in Peru</h4><p>Against about 20 per cent in Mexico. Peru paid the full fifth until 1736 while Mexico paid a tenth, so the incentive to evade was highest where corpa and smuggling were largest.</p><p class="src"><a class="ref" href="#b-garner">Garner 1988, 906</a></p></div>
-<div class="card"><div class="num">mint &gt; tax</div><h4>Two official counts disagree</h4><p>Totals from mint registrations run higher, and grow faster, than totals from tax receipts. Exemptions cut treasury takings but not mint entries.</p><p class="src"><a class="ref" href="#b-garner">Garner 1988, 905</a></p></div>
+<div class="card"><div class="num">35%</div><span class="et e-est">Historian's estimate</span><h4>Cost from pit to mint in Peru</h4><p>Against about 20 per cent in Mexico. Peru paid the full fifth until 1736 while Mexico paid a tenth, so the incentive to evade was highest where corpa and smuggling were largest.</p><p class="src"><a class="ref" href="#b-garner">Garner 1988, 906</a></p></div>
+<div class="card"><div class="num">mint &gt; tax</div><span class="et e-rec">Comparison of records</span><h4>Two official counts disagree</h4><p>Totals from mint registrations run higher, and grow faster, than totals from tax receipts. Exemptions cut treasury takings but not mint entries.</p><p class="src"><a class="ref" href="#b-garner">Garner 1988, 905</a></p></div>
 <div class="card warn"><h4>Missing ledgers</h4><p>Not all known treasury ledgers have been consulted. Contraband and missing accounts could reshape the seventeenth-century curve.</p><p class="src"><a class="ref" href="#b-garner">Garner 1988, 903 n. 9</a></p></div>
 </div>
 </div>
@@ -496,10 +508,10 @@ a{color:inherit}
 <div class="card warn" style="margin-top:14px"><h4>Official complicity</h4><p>The leak was not only evasion of the state. Viceroy Cañete invested in a China voyage himself, and Montesclaros admitted that custom had overridden prohibition (<a class="ref" href="#b-bon">Bonialian 2022, 49, 52</a>). At Buenos Aires, Brading and Cross point to "official laxity" (<a class="ref" href="#b-bc">561</a>).</p></div>
 </div>
 <div class="ev">
-<div class="card"><div class="num">5m / yr</div><h4>Mexico to Asia, c. 1600</h4><p>Against a legal limit of 500,000 pesos; 12 million reported smuggled in 1597.</p><p class="src">TePaske, in <a class="ref" href="#b-fg">Flynn and Giráldez 1995, 204</a></p></div>
-<div class="card"><div class="num">15–30%</div><h4>Out through Buenos Aires</h4><p>1–2 million pesos a year of Potosí output at the peak, partly exchanged for enslaved Africans.</p><p class="src"><a class="ref" href="#b-cross">Cross 1983, 414</a>, in Flynn and Giráldez, 216–17</p></div>
-<div class="card"><div class="num">½</div><h4>Of Peru's output diverted</h4><p>Perhaps 6 million pesos a year at the peak, through Buenos Aires, Sacramento and the Manila galleons.</p><p class="src"><a class="ref" href="#b-cross">Cross 1983, 420</a>, in Flynn and Giráldez, 204 n. 6</p></div>
-<div class="card"><div class="num">c. 12m</div><h4>Acapulco to the Philippines, 1597–1601</h4><p>8–10 million of it Potosí coin, despite repeated royal bans.</p><p class="src"><a class="ref" href="#b-bon">Bonialian 2022, 54 n. 37</a></p></div>
+<div class="card"><div class="num">5m / yr</div><span class="et e-est">Historian's estimate</span><h4>Mexico to Asia, c. 1600</h4><p>Against a legal limit of 500,000 pesos; 12 million reported smuggled in 1597.</p><p class="src">TePaske, in <a class="ref" href="#b-fg">Flynn and Giráldez 1995, 204</a></p></div>
+<div class="card"><div class="num">15–30%</div><span class="et e-est">Historian's estimate</span><h4>Out through Buenos Aires</h4><p>1–2 million pesos a year of Potosí output at the peak, partly exchanged for enslaved Africans.</p><p class="src"><a class="ref" href="#b-cross">Cross 1983, 414</a>, in Flynn and Giráldez, 216–17</p></div>
+<div class="card"><div class="num">½</div><span class="et e-est">Historian's estimate</span><h4>Of Peru's output diverted</h4><p>Perhaps 6 million pesos a year at the peak, through Buenos Aires, Sacramento and the Manila galleons.</p><p class="src"><a class="ref" href="#b-cross">Cross 1983, 420</a>, in Flynn and Giráldez, 204 n. 6</p></div>
+<div class="card"><div class="num">c. 12m</div><span class="et e-cla">Contemporary claim</span><h4>Acapulco to the Philippines, 1597–1601</h4><p>8–10 million of it Potosí coin, despite repeated royal bans.</p><p class="src"><a class="ref" href="#b-bon">Bonialian 2022, 54 n. 37</a></p></div>
 </div>
 </div>
 </div>
