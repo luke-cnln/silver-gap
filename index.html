@@ -834,7 +834,6 @@ $$('#flows path.flow.base').forEach((p,i)=>{});
  const io=new IntersectionObserver(es=>{run=es[0].isIntersecting;if(run){last=performance.now();requestAnimationFrame(loop);}});io.observe(cv);
  function loop(t){if(!run)return;const dt=Math.min(.05,(t-last)/1000);last=t;spawnAcc+=dt*(W/60);while(spawnAcc>1){spawn();spawnAcc--;}draw(dt);requestAnimationFrame(loop);}
 })();
-})();
 /* method lab: rebuild the floor */
 (function(){const sel=$('#lp');if(!sel)return;const PPM=935/110;
  D.forEach((r,i)=>{const o=document.createElement('option');o.value=i;o.textContent=r[0]+(r[1]==null?' (no register)':'');if(r[0]==='1651–55')o.selected=true;sel.appendChild(o);});
@@ -856,6 +855,7 @@ $$('#flows path.flow.base').forEach((p,i)=>{});
   svg.innerHTML='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+g100+'" y2="'+g100+'" stroke="var(--rule)" stroke-dasharray="4 4"/><text x="'+(L-6)+'" y="'+(g100+4)+'" text-anchor="end" style="font-size:11px">100%</text><text x="'+(L-6)+'" y="'+(ys(0)+4)+'" text-anchor="end" style="font-size:11px">0</text><path d="'+pth+'" fill="none" stroke="var(--red)" stroke-width="2.2" stroke-linejoin="round"/>'+dots+'<text x="'+L+'" y="'+(H-4)+'" style="font-size:11px">'+rows[0][0]+'</text><text x="'+(W-R)+'" y="'+(H-4)+'" text-anchor="end" style="font-size:11px">'+rows[n-1][0]+'</text>';
  }
  [ly,ls,lg,sel].forEach(e=>e.addEventListener('input',draw));sel.addEventListener('change',draw);draw();})();
+})();
 </script>
 </body>
 </html>
