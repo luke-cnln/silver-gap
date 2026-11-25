@@ -223,6 +223,17 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 @media(max-width:900px){.labgrid{grid-template-columns:minmax(0,1fr)}}
 .gl{border-bottom:1.5px dotted var(--teal);cursor:help}
 .gl:focus-visible{outline:2px solid var(--teal);outline-offset:2px;border-radius:2px}
+/* case file */
+.casefile{margin-top:clamp(36px,5vw,60px);border:1px solid var(--rule);border-left:4px solid var(--teal);border-radius:12px;padding:clamp(18px,3vw,28px);background:var(--panel,var(--bg))}
+.casefile h3{margin:4px 0 14px}
+.cf{list-style:none;padding:0;margin:0;display:grid;gap:14px;counter-reset:cf}
+.cf li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 16px;align-items:baseline;counter-increment:cf}
+.cf li::before{content:counter(cf);grid-row:1/3;font-family:"IM Fell English",Georgia,serif;font-size:28px;line-height:1;color:var(--teal)}
+.cf .cfk{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted,inherit);opacity:.8}
+.cf li a{grid-column:2;font-size:14px;justify-self:start}
+.cf li span:not(.cfk){grid-column:2;font-size:16.5px;line-height:1.5}
+.cf b{font-variant-numeric:tabular-nums}
+@media print{.casefile a{display:none}}
 /* next bridges */
 .next{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:4px 18px;margin-top:clamp(40px,6vw,64px);padding:18px 0 4px;border-top:1px solid var(--rule);text-decoration:none;color:inherit}
 .next .kicker{grid-column:1;margin:0}
@@ -363,7 +374,7 @@ a{color:inherit}
 <div class="labgrid">
 <div class="labin">
 <div class="sl"><label for="lp">Five-year period <output id="lpo"></output></label><div class="selwrap"><select id="lp" aria-label="Five-year period"></select></div><small>Brading and Cross, Table I. The register stops after 1656–60.</small></div>
-<div class="sl"><label for="ly">Silver per quintal of mercury <output id="lyo"></output></label><div class="rng"><input type="range" id="ly" min="100" max="150" step="1" value="110"><span class="anc" style="left:20%">110 · Brading and Cross</span></div><small>Their figure is "deliberately low": 110 marks, or 935 pesos (1 mark = 8.5 pesos). Higher yields raise the floor.</small></div>
+<div class="sl"><label for="ly">Silver per quintal of mercury <output id="lyo"></output></label><div class="rng"><input type="range" id="ly" min="100" max="150" step="1" value="110"><span class="anc" style="left:20%">110 · Brading and Cross</span></div><small>They chose a deliberately low figure: 110 marks, or 935 pesos (1 mark = 8.5 pesos). Higher yields raise the floor.</small></div>
 <div class="sl"><label for="ls">Silver smelted, not amalgamated <output id="lso"></output></label><div class="rng"><span class="band2" style="left:43.3%;width:56.7%"></span><input type="range" id="ls" min="0" max="30" step="1" value="15"><span class="anc" style="left:50%">15% · their margin</span></div><small>Smelting left no trace in the mercury accounts. The teal band is their range of 13 to 30 per cent (p. 570).</small></div>
 <div class="sl"><label class="chk"><input type="checkbox" id="lg" checked> Add 10 per cent for gold, as they do</label><small>The Seville register counts gold and silver together.</small></div>
 </div>
@@ -460,13 +471,13 @@ a{color:inherit}
 <div>
 <h3>A price that pulled silver west</h3>
 <p>Silver was worth about twice as much in China as in Spain (<a class="ref" href="#b-fg">Flynn and Giráldez 1995, 206</a>). That premium pulled it across the Pacific and down the Río de la Plata, outside the Seville trade.</p>
-<div class="card warn" style="margin-top:14px"><h4>Official complicity</h4><p>The leak was not only evasion of the state. Viceroy Cañete invested in a China voyage himself, and Montesclaros admitted that custom had overridden prohibition (<a class="ref" href="#b-bon">Bonialian 2022, 49, 53</a> ⚑). At Buenos Aires, Brading and Cross point to "official laxity" (<a class="ref" href="#b-bc">561</a>).</p></div>
+<div class="card warn" style="margin-top:14px"><h4>Official complicity</h4><p>The leak was not only evasion of the state. Viceroy Cañete invested in a China voyage himself, and Montesclaros admitted that custom had overridden prohibition (<a class="ref" href="#b-bon">Bonialian 2022, 49, 52</a>). At Buenos Aires, Brading and Cross point to "official laxity" (<a class="ref" href="#b-bc">561</a>).</p></div>
 </div>
 <div class="ev">
 <div class="card"><div class="num">5m / yr</div><h4>Mexico to Asia, c. 1600</h4><p>Against a legal limit of 500,000 pesos; 12 million reported smuggled in 1597.</p><p class="src">TePaske, in <a class="ref" href="#b-fg">Flynn and Giráldez 1995, 204</a></p></div>
 <div class="card"><div class="num">15–30%</div><h4>Out through Buenos Aires</h4><p>1–2 million pesos a year of Potosí output at the peak, partly exchanged for enslaved Africans.</p><p class="src"><a class="ref" href="#b-cross">Cross 1983, 414</a>, in Flynn and Giráldez, 216–17</p></div>
 <div class="card"><div class="num">½</div><h4>Of Peru's output diverted</h4><p>Perhaps 6 million pesos a year at the peak, through Buenos Aires, Sacramento and the Manila galleons.</p><p class="src"><a class="ref" href="#b-cross">Cross 1983, 420</a>, in Flynn and Giráldez, 204 n. 6</p></div>
-<div class="card"><div class="num">c. 12m</div><h4>Acapulco to the Philippines, 1597–1601</h4><p>8–10 million of it Potosí coin, despite repeated royal bans.</p><p class="src"><a class="ref" href="#b-bon">Bonialian 2022, 54 n. 37</a> ⚑</p></div>
+<div class="card"><div class="num">c. 12m</div><h4>Acapulco to the Philippines, 1597–1601</h4><p>8–10 million of it Potosí coin, despite repeated royal bans.</p><p class="src"><a class="ref" href="#b-bon">Bonialian 2022, 54 n. 37</a></p></div>
 </div>
 </div>
 </div>
@@ -546,13 +557,23 @@ a{color:inherit}
 <p><b>So</b> the seventeenth-century "crisis" of American silver was in large part a crisis of registration.</p>
 </div>
 </div>
+<div class="casefile" id="casefile" aria-live="polite">
+<div class="kicker">Your case file</div>
+<h3>What you concluded along the way</h3>
+<ol class="cf">
+<li><span class="cfk">The floor</span><span id="cf1"></span> <a href="#lab">Change it</a></li>
+<li><span class="cfk">The leaks</span><span id="cf2"></span> <a href="#peso">Change them</a></li>
+<li><span class="cfk">What is left</span><span id="cf3"></span></li>
+</ol>
+<p class="meta">Built from the settings you chose in Part 1 and Part 4, for 1651–55. It updates as you change them and nothing is stored.</p>
+</div>
 </div>
 </section>
 
 <section class="band alt" id="sources">
 <div class="wrap">
 <h2>Sources</h2>
-<p class="meta">Chicago author-date. Hover or focus any underlined citation on the page to see the full reference. ⚑ marks page numbers still to be checked.</p>
+<p class="meta">Chicago author-date. Hover or focus any underlined citation on the page to see the full reference.</p>
 <ol class="bib">
 <li id="b-bon">Bonialian, Mariano A. 2022. "El Perú virreinal transpacífico, 1580–1604: Agentes, plata y productos chinos entre Potosí, Lima, Nueva España, Filipinas y Macao." <i>Historia</i> (Santiago) 55 (1): 43–81. https://doi.org/10.4067/S0717-71942022000100043.</li>
 <li id="b-bc">Brading, D. A., and Harry E. Cross. 1972. "Colonial Silver Mining: Mexico and Peru." <i>Hispanic American Historical Review</i> 52 (4): 545–79. https://doi.org/10.2307/2512781.</li>
@@ -705,7 +726,7 @@ const N={
  potosi:{t:'reg',k:'Station 1 · the mine',big:'25% to ½',p:'The Cerro Rico. Workers kept shares of rich ore (corpa) and sold it for small-scale refining outside the Crown\'s tax.',r:[['b-smith','Smith 2008, 36–37'],['b-tandeter','Tandeter 1981, 134'],['b-bc','Brading and Cross 1972, 567']],c:'Shares range from 25% (corpa) to ½ (capchas, 1774); some trapiche silver was sold to the state bank.',tab:'mine'},
  huancavelica:{t:'hg',k:'The independent check',big:'mercury',p:'Peru\'s refineries amalgamated silver ore with mercury. Because mercury was an input, not a taxed product, the amount used sets a floor for silver produced.',r:[['b-bc','Brading and Cross 1972, 570']],c:'A floor only: smelted silver used no mercury.',tab:'mine'},
  arica:{t:'reg',k:'Registered route',big:'',p:'Registered silver from Potosí came down to the Pacific coast for shipment north to Lima\'s port and on to Panama.',r:[],c:'Context for the official route; figures for it are in the Seville register.',tab:'treasury'},
- callao:{t:'leak',k:'Station 3 · routes',big:'8–10m',p:'From Lima, silver also went north to New Spain, where it joined the Acapulco trade with Asia. Bonialian puts 8 to 10 million pesos of Potosí coin in the 12 million that crossed to the Philippines in 1597–1601.',r:[['b-bon','Bonialian 2022, 54 n. 37 ⚑']],c:'Contemporary claims, some partisan.',tab:'routes'},
+ callao:{t:'leak',k:'Station 3 · routes',big:'8–10m',p:'From Lima, silver also went north to New Spain, where it joined the Acapulco trade with Asia. Bonialian puts 8 to 10 million pesos of Potosí coin in the 12 million that crossed to the Philippines in 1597–1601.',r:[['b-bon','Bonialian 2022, 54 n. 37']],c:'Contemporary claims, some partisan.',tab:'routes'},
  portobelo:{t:'reg',k:'Registered route',big:'',p:'Silver crossed the isthmus for the fleets to Spain.',r:[],c:'',tab:'routes'},
  havana:{t:'reg',k:'Registered route',big:'',p:'The fleets from Portobelo and Veracruz gathered here before crossing the Atlantic to Seville.',r:[],c:'',tab:'routes'},
  seville:{t:'reg',k:'Station 4 · Europe',big:'12.1m',p:'The registers at Seville, the basis of Hamilton\'s and the Chaunus\' series, covered only the taxed trade. In 1651–55 they record 12.1 million pesos.',r:[['b-fg','Flynn and Giráldez 1995, 205 n. 7'],['b-bc','Brading and Cross 1972, 579']],c:'',tab:'europe'},
@@ -713,7 +734,7 @@ const N={
  buenosaires:{t:'leak',k:'Station 3 · routes',big:'15–30%',p:'1 to 2 million pesos a year of Potosí output left through Buenos Aires at the peak, under what Brading and Cross call "official laxity".',r:[['b-cross','Cross 1983, 414'],['b-bc','Brading and Cross 1972, 561']],c:'Figures from Cross, cited through Flynn and Giráldez 216–17.',tab:'routes'},
  africa:{t:'leak',k:'Station 3 · routes',big:'',p:'Part of the silver leaving through Buenos Aires was exchanged for enslaved Africans brought by Portuguese traders.',r:[['b-fg','Flynn and Giráldez 1995, 216–17']],c:'The map marks Luanda as an indicative point of the trade, not a measured flow.',tab:'routes'},
  acapulco:{t:'leak',k:'Station 3 · routes',big:'5m / yr',p:'The Manila galleon was limited by law to 500,000 pesos a year. Around 1600, about 5 million a year went to Asia, and 12 million was reported smuggled in 1597.',r:[['b-fg','TePaske, in Flynn and Giráldez 1995, 204']],c:'',tab:'routes'},
- manila:{t:'leak',k:'Station 3 · routes',big:'complicity',p:'The trade ran with official help: Viceroy Cañete invested in a China voyage, and Montesclaros admitted custom had overridden prohibition.',r:[['b-bon','Bonialian 2022, 49, 53 ⚑']],c:'',tab:'routes'},
+ manila:{t:'leak',k:'Station 3 · routes',big:'complicity',p:'The trade ran with official help: Viceroy Cañete invested in a China voyage, and Montesclaros admitted custom had overridden prohibition.',r:[['b-bon','Bonialian 2022, 49, 52']],c:'',tab:'routes'},
  canton:{t:'leak',k:'Why silver went west',big:'≈ 2×',p:'Silver was worth about twice as much in China as in Spain, which pulled it across the Pacific.',r:[['b-fg','Flynn and Giráldez 1995, 206']],c:'',tab:'routes'},
  zacatecas:{t:'reg',k:'Station 2 · the treasury',big:'⅕ vs ⅒',p:'New Spain\'s mines paid a tenth to the Crown while Peru paid the full fifth until 1736, so evasion paid best in Peru.',r:[['b-garner','Garner 1988, 906']],c:'',tab:'treasury'},
  veracruz:{t:'reg',k:'Registered route',big:'',p:'New Spain\'s registered silver left for Havana and Seville; mercury from Almadén came in.',r:[],c:'',tab:'routes'},
@@ -855,6 +876,18 @@ $$('#flows path.flow.base').forEach((p,i)=>{});
   svg.innerHTML='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+g100+'" y2="'+g100+'" stroke="var(--rule)" stroke-dasharray="4 4"/><text x="'+(L-6)+'" y="'+(g100+4)+'" text-anchor="end" style="font-size:11px">100%</text><text x="'+(L-6)+'" y="'+(ys(0)+4)+'" text-anchor="end" style="font-size:11px">0</text><path d="'+pth+'" fill="none" stroke="var(--red)" stroke-width="2.2" stroke-linejoin="round"/>'+dots+'<text x="'+L+'" y="'+(H-4)+'" style="font-size:11px">'+rows[0][0]+'</text><text x="'+(W-R)+'" y="'+(H-4)+'" text-anchor="end" style="font-size:11px">'+rows[n-1][0]+'</text>';
  }
  [ly,ls,lg,sel].forEach(e=>e.addEventListener('input',draw));sel.addEventListener('change',draw);draw();})();
+/* case file: carry the reader's own settings into the verdict */
+(function(){if(!$('#casefile'))return;const PPM=935/110,R5155=D.find(d=>d[0]==='1651–55');let touchedLab=false,touchedPeso=false;
+ ['#ly','#ls','#lg'].forEach(q=>{const el=$(q);el&&el.addEventListener('input',()=>{touchedLab=true;cf();});});
+ S.forEach(s=>{const el=document.getElementById('r-'+s.id);el&&el.addEventListener('input',()=>{touchedPeso=true;cf();});});
+ function cf(){const y=+$('#ly').value,sm=+$('#ls').value,g=$('#lg').checked;
+  const fl=R5155[2]/935*y*PPM*(1+sm/100+(g?0.10:0)),share=R5155[1]/fl*100;
+  $('#cf1').innerHTML=(touchedLab?'On your assumptions':'On Brading and Cross\'s own assumptions')+' ('+y+' marks a quintal, '+sm+'% smelted, gold '+(g?'included':'left out')+'), the mines produced at least <b>'+fl.toFixed(1)+' million pesos</b> in 1651–55. The register shows 12.1, so <b>at most '+Math.round(share)+' per cent</b> reached it.';
+  let v=100;S.forEach(s=>{v*=1-(+document.getElementById('r-'+s.id).value)/100;});
+  $('#cf2').innerHTML=(touchedPeso?'Your four leaks':'The starting leak settings')+' bring 100 pesos down to <b>'+Math.round(v)+'</b> by the time the silver reaches Seville.';
+  const gap=v-share;
+  $('#cf3').innerHTML=gap>0.5?'<b>'+Math.round(gap)+' of every 100 pesos</b> are still unaccounted for. Either the leaks were larger than any single source records, or silver stayed and circulated in the Americas. The sources cannot say which, which is why the verdict is a range.':'On these settings the documented leaks <b>cover the whole gap</b>. Check them against the teal source marks in Part 4: settings this high sit at or beyond what the sources support.';}
+ cf();})();
 })();
 </script>
 </body>
